@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP: an error's `getPrimaryErrorMessage()` called a method that doesn't exist, such as `getDeveloperError()` for `developerErrorMessage`, or a method on `null`, unless the property marked with `x-ms-primary-error-message` was a `message` one object down. It now returns the message, or `''` when the message or an object on its path is missing; the code generated for a `message` one object down doesn't change. [#8655](https://github.com/microsoft/kiota/issues/8655)
 - Go: an error's `Error()` panicked with a nil pointer dereference when the response didn't carry the property marked with `x-ms-primary-error-message`, or an object on its path, so printing or logging the error failed. It now returns `""` in that case, as C#, TypeScript, Python, PHP and Ruby do, and the message when it is present. [#8655](https://github.com/microsoft/kiota/issues/8655)
 - Java: an error's `getMessage()` threw a `NullPointerException`, also from `toString()` when the error was logged, when an object on the path to the property marked with `x-ms-primary-error-message` was missing. It now returns `super.getMessage()`, which is `null` for generated errors, as when the marked property itself is missing; a property directly on the error is read as before. [#8655](https://github.com/microsoft/kiota/issues/8655)
+- Local external references are checked against `--allowed-external-origins` using the resolved filesystem path that is opened.
 
 ## [1.39.0] - 2026-11-17
 
